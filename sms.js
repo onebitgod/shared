@@ -1,0 +1,54 @@
+import qs from 'qs';
+// import axios from "../utils/axios.js";
+import { axiosClient } from './helpers.js';
+
+const apiUrl = process.env.SMS_API_URL;
+const apiKey = process.env.SMS_API_KEY;
+const route = process.env.SMS_ROUTE;
+const defaultSenderId = process.env.SMS_SENDER_ID;
+const defaultPeid = process.env.SMS_PEID;
+
+/**
+ * @typedef {object} SMSOptions
+ * @property {string} mobile
+ * @property {string} content
+ * @property {string} [senderId]
+ * @property {string} [channel]
+ * @property {string} [peid]
+ */
+
+/**
+ * @param {SMSOptions} options
+ */
+export const sendSMS = async (options) => {
+  const {
+    mobile,
+    content,
+    senderId = defaultSenderId,
+    peid = defaultPeid,
+    channel = 'Trans',
+  } = options;
+
+  const query = qs.stringify({
+    APIKey: apiKey,
+    senderid: senderId,
+    peid: peid,
+    channel,
+    number: mobile,
+    text: content,
+    route,
+    DCS: 0,
+    flashsms: 0,
+  });
+
+  return axiosClient()
+    .get(`${apiUrl}?${query}`)
+    .then((data) => {
+      console.log(data);
+      return [null, data];
+    })
+    .catch((err) => {
+      console.error(err);
+      return [err, null];
+    });
+};
