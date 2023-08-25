@@ -47,9 +47,10 @@ export const stringToObjectId = (id) => {
 };
 
 export const callService = async (service, method = 'post', path, body) => {
+  const serviceName = process.env[`${service.toUpperCase()}_SERVICE`] || service
   try {
     const res = await axios({
-      url: `http://${service}${path}`,
+      url: `http://${serviceName}${path}`,
       method,
       data: body,
       timeout: 1000 * 8,
