@@ -17,7 +17,7 @@ export async function connectMongoDB() {
     ssl: process.env.MONGO_DB_SSL || false,
   });
 
-  logger.info('MongoDB is connected');
+  console.log('MongoDB is connected');
 }
 
 export { mongoose };

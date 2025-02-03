@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package account;
+
+service Account {
+  rpc GetUserById (UserIdRequest) returns (UserResponse);
+  rpc CreateUser (CreateUserRequest) returns (UserResponse);
+}
+
+message GetAccountById {
+  string id = 1;
+}
+
+message CreateAccount {
+  string name = 1;
+  string email = 2;
+}
+
+message UpdateAccount {
+  string name = 1;
+  string email = 2;
+}
+
+message Account {
+  string user_id = 1;
+  string name = 2;
+  string email = 3;
+}

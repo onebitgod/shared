@@ -2,14 +2,14 @@ import session from 'express-session';
 import RedisStore from 'connect-redis';
 import redis from '../utils/redis.js';
 
-const checkSession = (req, res, next) => {
+export const checkSession = (req, res, next) => {
   if (!req.user) {
     return sendResponse(res, 401, 'Authorization is required');
   }
   next();
 };
 
-const sessionMiddleware = () => {
+export const sessionMiddleware = () => {
   const sessionManager = session({
     name: 'id',
     secret: process.env.JWT_ACCESS_TOKEN_SECRET || '',
@@ -38,5 +38,3 @@ const sessionMiddleware = () => {
     });
   };
 };
-
-export default { sessionMiddleware, checkSession };
