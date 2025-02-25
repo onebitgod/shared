@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import { ObjectId } from '../constants/db.js';
 import { getEnums } from '../utils/helpers.js';
-import { required } from 'joi';
 
 const schema = new mongoose.Schema(
   {
@@ -10,7 +9,7 @@ const schema = new mongoose.Schema(
       required: true,
       ref: 'account',
     },
-    coins: {
+    points: {
       total: {
         type: Number,
         default: 0,

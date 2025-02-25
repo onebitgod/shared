@@ -1,15 +1,15 @@
 import mongoose from 'mongoose';
-import { ObjectId } from 'shared/constants/db.js';
-import { getEnums } from 'shared/utils/helpers.js';
+import { ObjectId } from '../../constants/db.js';
+import { getEnums } from '../../utils/helpers.js';
 
-export const UserBetStatus = {
+export const QuoteResponseStatus = {
   PLACED: 'placed',
   WON: 'won',
   LOST: 'lost',
   WITHDRAWN: 'withdrawn',
 };
 
-export const UserBetSentiment = {
+export const QuoteResponseSentiment = {
   POSITIVE: 'positive',
   NEGATIVE: 'negative',
 };
@@ -22,25 +22,25 @@ const schema = new mongoose.Schema(
       required: true,
     },
 
-    bet: {
+    qoute: {
       type: ObjectId,
-      ref: 'bet',
+      ref: 'qoute',
       required: true,
     },
 
-    betCoins: Number,
-    withdrawnCoins: Number,
+    quotePoints: Number,
+    withdrawnPoints: Number,
 
     sentiment: {
       type: String,
-      enum: getEnums(UserBetSentiment),
+      enum: getEnums(QuoteResponseSentiment),
       required: true,
     },
 
     status: {
       type: String,
-      enum: getEnums(UserBetStatus),
-      default: UserBetStatus.PLACED,
+      enum: getEnums(QuoteResponseStatus),
+      default: QuoteResponseStatus.PLACED,
     },
   },
   { timestamps: true, id: false }
@@ -48,6 +48,6 @@ const schema = new mongoose.Schema(
 
 schema.index({ account: 1 });
 
-const UserBetSchema = mongoose.model('bet', schema);
+const quoteResponseSchema = mongoose.model('quoteResponse', schema);
 
-export default UserBetSchema;
+export default quoteResponseSchema;

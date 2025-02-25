@@ -6,4 +6,5 @@ export * from './axios.js';
 export * from './helpers.js';
 export * from './db.js';
 export * from './validators.js';
+export * from './jwt.js';
 export { logger };

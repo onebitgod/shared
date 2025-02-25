@@ -1,6 +1,8 @@
 import joi from 'joi';
 import mongoose from 'mongoose';
 import dayjs from 'dayjs';
+import { ethers } from 'ethers';
+import { sendResponse } from './helpers.js';
 
 export const validate = (schema, options = {}) => {
   return (req, res, next) => {
@@ -40,6 +42,19 @@ export const validate = (schema, options = {}) => {
 };
 
 export const validators = {
+  ethAddress: () =>
+    joi
+      .string()
+      .custom((value, helpers) => {
+        if (ethers.isAddress(value) === false) {
+          return helpers.error('ethAddress');
+        }
+
+        return value;
+      })
+      .messages({
+        ethAddress: '{{#label}} must be a valid Ethereum Address',
+      }),
   objectId: () =>
     joi
       .string()

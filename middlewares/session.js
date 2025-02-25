@@ -3,7 +3,7 @@ import RedisStore from 'connect-redis';
 import redis from '../utils/redis.js';
 
 export const checkSession = (req, res, next) => {
-  if (!req.user) {
+  if (!req.account) {
     return sendResponse(res, 401, 'Authorization is required');
   }
   next();
@@ -33,7 +33,7 @@ export const sessionMiddleware = () => {
       if (err) {
         return next(err);
       }
-      req.user = req.session.user;
+      req.account = req.session.account;
       next();
     });
   };

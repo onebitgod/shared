@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { ObjectId } from 'shared/constants/db.js';
-import { getEnums } from 'shared/utils/helpers.js';
+import { ObjectId } from '../constants/db.js';
+import { getEnums } from '../utils/helpers.js';
 
 const metaSchema = new mongoose.Schema({});
 
